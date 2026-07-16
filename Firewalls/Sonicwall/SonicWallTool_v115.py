@@ -4,22 +4,17 @@ import pandas as pd
 import re
 import os
 import tkinter as tk
-from tkinter import Tk, Text, Scrollbar, END, filedialog, messagebox, ttk
+from tkinter import Text, Scrollbar, END, filedialog, messagebox, ttk
 from datetime import datetime
 import ipaddress
 import sys
-import subprocess
-import shutil
-import threading
 import time
-import random
 import requests
 import ctypes
 
 
-# Network updater info
-# NETWORK_PATH = r"\\192.168.7.16\SonicWallTool\\"
-UPDATE_BASE_URL = "http://192.168.7.16/SonicWallTool/"
+# Update from
+GITHUB_RELEASE_API = ("https://api.github.com/repos/PacketForge007/SonicWallTool/releases/latest")
 
 DEFAULT_PASSWORD = "Admin@12345"
 
@@ -82,12 +77,9 @@ def download_with_progress(url, dst, progress_window):
                 progress_window.update_download(percent, speed, eta)
 
 
-def launch_updater(latest_version, root):
+def launch_updater(latest_version, download_url, root):
     base_path = os.path.dirname(os.path.abspath(sys.argv[0]))
     updater_path = os.path.join(base_path, "SonicUpdater.exe")
-
-    version_no_dots = latest_version.replace(".", "")
-    download_url = UPDATE_BASE_URL + f"SonicWallTool_v{version_no_dots}.exe"
 
     if not os.path.exists(updater_path):
         messagebox.showerror("Updater Missing", "Updater program not found.")
@@ -104,7 +96,7 @@ def launch_updater(latest_version, root):
         return False
 
     try:
-        params = f'"{latest_version}" "{UPDATE_BASE_URL}"'
+        params = f'"{latest_version}" "{download_url}"'
 
         result = ctypes.windll.shell32.ShellExecuteW(
             None,
@@ -131,17 +123,35 @@ def launch_updater(latest_version, root):
 
 
 def check_for_updates(auto=False):
-    latest_version_url = UPDATE_BASE_URL + "latest_version.txt"
-
     try:
-        response = requests.get(latest_version_url, timeout=10)
+        response = requests.get(GITHUB_RELEASE_API, timeout=10)
         response.raise_for_status()
-        latest_version = response.text.strip()
-    except Exception:
+
+        release = response.json()
+
+        latest_version = release["tag_name"].lstrip("v")
+        download_url = None
+
+        for asset in release["assets"]:
+            name = asset["name"]
+
+            if (
+                name.startswith("SonicWallTool_v")
+                and name.endswith(".exe")
+                and "Installer" not in name
+                and "Updater" not in name
+            ):
+                download_url = asset["browser_download_url"]
+                break
+
+        if not download_url:
+            raise Exception("Application executable not found in GitHub release.")
+
+    except Exception as e:
         if not auto:
             messagebox.showerror(
                 "Update Check Failed",
-                "Could not connect to update server."
+                str(e)
             )
         return
 
@@ -157,12 +167,7 @@ def check_for_updates(auto=False):
         if answer:
             file_menu.entryconfig(EXIT_MENU_INDEX, state="disabled")
 
-            started = launch_updater(latest_version, root)
-
-            # if started:
-                # sys.exit()
-            # else:
-                # file_menu.entryconfig(EXIT_MENU_INDEX, state="normal")
+            started = launch_updater(latest_version, download_url, root)
 
             if not started:
                 file_menu.entryconfig(EXIT_MENU_INDEX, state="normal")

@@ -9,8 +9,6 @@ from datetime import datetime
 UPDATE_LOG_FILE = "update.log"
 APP_NAME = "SonicWallTool.exe"
 BACKUP_NAME = "SonicWallTool_Old.exe"
-latest_version = sys.argv[1]
-UPDATE_BASE_URL = "http://192.168.7.16/SonicWallTool/"
 
 def log_update(message):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -114,15 +112,17 @@ def rollback(backup_exe, local_exe):
 
 
 def main():
+
     if len(sys.argv) < 3:
         log_update("ERROR: Missing arguments")
+        messagebox.showerror(
+            "Update Error",
+            "The updater did not receive the required information"
+        )
         sys.exit(1)
 
     latest_version = sys.argv[1]
-    base_url = sys.argv[2]
-
-    version_no_dots = latest_version.replace(".", "")
-    download_url = base_url + f"SonicWallTool_v{version_no_dots}.exe"
+    download_url = sys.argv[2]
 
     current_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
@@ -139,7 +139,7 @@ def main():
 
         log_update("=" * 60)
         log_update(f"Starting update to version {latest_version}")
-        log_update(f"Download URL: {download_url}")
+        log_update(f"Download Source: {download_url}")
 
         progress.update_progress(5, "Preparing update...")
 

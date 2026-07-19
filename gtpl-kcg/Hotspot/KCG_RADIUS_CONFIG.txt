@@ -1,0 +1,22 @@
+/ip hotspot profile
+add dns-name=hs.zencc.net hotspot-address=192.168.52.1 html-directory=\
+    flash/WSMP login-by=http-pap name=KCG_Shri_K.P.Shah_Law_College_Jamnagar radius-interim-update=\
+    10m use-radius=yes
+/ip hotspot
+add address-pool="User-Pool" disabled=no idle-timeout=30m interface=\
+    vlan200-USER name=KCG_Shri_K.P.Shah_Law_College_Jamnagar profile=KCG_Shri_K.P.Shah_Law_College_Jamnagar
+/ip hotspot user
+add name=admin password=admin@123
+/ip hotspot walled-garden
+add comment="place hotspot rules here" disabled=yes
+add dst-host=*.zencc.net
+add dst-host=*zencc*
+/ip hotspot walled-garden ip
+add action=accept disabled=no dst-address=36.255.3.166 !dst-address-list \
+    !dst-port !protocol !src-address !src-address-list
+add action=accept disabled=no dst-address=194.195.118.174 !dst-address-list \
+    !dst-port !protocol !src-address !src-address-list
+/radius
+add address=36.255.3.166 secret=BrE@d8Q#BBhot5p0t service=hotspot
+/
+

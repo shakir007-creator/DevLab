@@ -1,0 +1,5 @@
+Latest_B2B File Formula:
+
+=IF(OR(@'Lookup-Sheet'!$D:D = "", ISNUMBER(SEARCH("CRQ",@D:D ))), "",IFERROR(IFERROR(INDEX(B2B!$1:$1048576,MATCH(@'Lookup-Sheet'!$D:$D,B2B!$AD:$AD,0),MATCH(@'Lookup-Sheet'!$A$1:$M$1,B2B!$A$1:$AK$1,0)),INDEX('Link Shifting'!$1:$1048576,MATCH(@'Lookup-Sheet'!$D:$D,'Link Shifting'!$AC:$AC,0),MATCH(@'Lookup-Sheet'!$A$1:$M$1,'Link Shifting'!$A$1:$AD$1,0))), "No Data Found"))
+
+=@IF(@D:D="","",IF(ISNUMBER(SEARCH("CRQ",@D:D)),D:D,C1))

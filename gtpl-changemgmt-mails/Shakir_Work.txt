@@ -1,0 +1,109 @@
+
+
+CRQ: 1100214448, 1100215673: 23-Feb --> Mail sent to CE
+
+CRQ: 1100215656: 24-Feb --> Mail sent to CE
+
+CRQ: 1100213171, 1100213754, 1100214942, 1100215342: 25-Feb --> Mail sent to CE
+
+
+
+This python code should be in python version 3.12.5. Which is the latest version of python currently.
+
+I receive some mails regularly and I have to send some mails based on those received mails to different customers as I receive them. Received mails are in "Changemgmt Airtel" folder in outlook.
+
+If the received email body contains the word "Postponed" then ignore that received email, mark it as read and continue to the next received email.
+
+The python code will copy the table from the received mail. The table is mentioned after the "Details of Maintenance : -" heading and of 2 columns.
+
+Mail body should start from the modifications specified by the user and then append the above mentioned table to the mail body from the received outlook mails.
+
+Received emails also contains identity numbers table of recipients after the "Circuit Detail: Circuits as per the particular activity-" heading. The table content format is "identity number: Company name". The recipients identity numbers corresponds to their names are stored in an excel file sheet columns are "AIRTEL Circuit ID" and "Customer Name" on the local system. And another sheet in the same excel file contains the name of the recipient corresponds to their mail ids columns are "Customer Name" and "Email-ID". So, code should take the identity numbers from the received mails and lookup the recipient's name in the sheet that contains the identity numbers and names then based on the name of the recipient the code should lookup their mail ids in the other sheet that contains names and mail ids. If the first excel sheet doesn't contain the identity number which is taken from the received email then ignore that identity number and continue with the next identity number in the received mail. For each company name, email recipients may be more than one delimited by "," in the excel sheet, so put all of them in a single email.
+
+The code will start the subject of the mail by "GTPL || " and then append the subject line of the received mail.
+
+Email signature should be the default signature of outlook and CC recipients are the same in all mails that is defined by the user in the code. Also tag each email as High importance in outlook.
+
+Dear Team & Tanmay Ji,
+
+Kindly share latest update regarding the subjected CRQ if it is still planned or postponed.
+
+Also, this Mumbai location activity is getting postponed every time for last 3 Months (This happended more than 10 times). Everytime we mail to our customers and then they ask us for the update.
+
+So, please confirm if this activity is going to be held and will get completed or will get postponed like everytime?
+
+
+
+
+support@pol.net.in
+
+Need to update mail id for Airgenie CKT IDs in chngmgmt
+Siebel ops Team <SIEBELOPS@airtel.com>; 
+Siebel support <Siebel.support@airtel.com>;
+Central Ithelpdesk <central.ithelpdesk@airtel.com>
+Need to loop SAM
+
+
+8882984973 --> ACT
+
+9264457560 --> Hostaxis
+
+7211153331 --> Sphatik
+
+7874960769 --> Smart_VMD Gauravsinh Bhati
+
+9433253566 --> BACBPL
+
+9663326206 --> Manoj AIT
+
+9711704887 --> Gaurav Sharma Jaipur
+
+7874960769 --> Gaurav Bhai VMD GNR
+
+9106503020 --> Pyramid Radio Mirchi BRD
+
+9024689015 --> Music BROADCAST JPR
+
+9374217275 --> Lord Ishwar Hotel BRD
+
+8527049638 --> Pradeep Kumar Noida Activity
+
+8229836874 --> Khushi Airtel Chennai Activity
+
+6289364699 --> Bhorer Alo
+
+8083260326 --> Big Data
+
+9417077031 --> Jassal (Angel Air)
+
+9822508714 --> Arun wardwizard
+
+6357049045 --> GTPL NOC CORE
+
+wifiwalanet@gmail.com
+
+9545077870 --> Abhijeet Haash
+
+Office Security Number: 9680870947 Dhansukh Bhai
+
+9033885555 --> Parthiv Bhai
+
+7718098666/8527688577 --> Multicraft
+
+9917825552 --> Apex Fibernet
+
+Venus Geo - 9959999974
+
+Music Broadcast Ved Prakash: 9829591911
+
+bigdatabroadband@gmail.com
+
+user add name=amit group=full password=Qwerty#123
+user add name=sakir group=full password=Sh4k!r#4132
+user add name=vinayak group=full password=V!n@yak#4132
+user add name=bhavsingh group=full password=Bh@vs!ngh#4132
+user add name=rutvik group=full password=Ru7v!k#4132
+user add name=dhaval group=full password=Dh4v@l#4132
+
+
+Norton Keys: JW9934VFJHPVVR84JGR8GG74J , JGKXT37MJJCW8F3W3P6BCRBT6
